@@ -138,5 +138,3 @@ function scrollToTop() {
     behavior: 'smooth',
   });
 }
-
-scrollToTopBtn.addEventListener('click', scrollToTop);
