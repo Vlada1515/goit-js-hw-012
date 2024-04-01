@@ -12,8 +12,8 @@ export async function fetchImages(searchQuery, page = 1, perPage = 15) {
         image_type: 'photo',
         orientation: 'horizontal',
         safesearch: true,
-        page: "page",
-        per_page: "perPage",
+        page: page,
+        per_page: perPage,
       },
     });
 
