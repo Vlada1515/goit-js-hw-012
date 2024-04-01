@@ -1,12 +1,16 @@
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 import { fetchImages } from './js/pixabay-api';
-import { renderGallery, galleryElement } from './js/render-functions';
+import { renderGallery, galleryElement, showEndOfCollectionMessage } from './js/render-functions';
+import './css/loader.css';
 
 const searchForm = document.querySelector('.form');
 const inputElement = document.querySelector('.search-input');
 const loader = document.querySelector('.loader');
 const loadMoreBtn = document.querySelector('.load-more-btn');
+
+
+hideLoader();
 
 let searchTerm = '';
 let pageCounter = 1;
@@ -98,7 +102,7 @@ loadMoreBtn.addEventListener('click', async () => {
   }
 });
 
-// *loader
+
 function showLoader() {
   loader.classList.remove('hidden');
 }
@@ -107,7 +111,7 @@ function hideLoader() {
   loader.classList.add('hidden');
 }
 
-// * button load more images
+
 function showLoadMoreBtn() {
   loadMoreBtn.style.display = 'block';
 }
@@ -123,19 +127,5 @@ function hideEndOfCollectionMessage() {
   }
 }
 
-// * scroll
-window.addEventListener('scroll', () => {
-  if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
-    scrollToTopBtn.style.display = 'flex';
-  } else {
-    scrollToTopBtn.style.display = 'none';
-  }
-});
 
-function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
-}
 

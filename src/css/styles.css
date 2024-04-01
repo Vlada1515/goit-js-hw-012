@@ -1,7 +1,7 @@
 @import url('./reset.css');
 @import url('./main.css');
 @import url('./loader.css');
-@import url("./button.css");
+@import url('./button.css');
 
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
@@ -18,3 +18,4 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
