@@ -11,7 +11,6 @@ const lightbox = new SimpleLightbox('.gallery a', {
 lightbox.refresh();
 
 export function renderGallery(images) {
-  galleryElement.innerHTML = '';
 
   images.forEach(image => {
     const cardHTML = `
