@@ -8,40 +8,37 @@ const inputElement = document.querySelector('.search-input');
 const loader = document.querySelector('.loader');
 const loadMoreBtn = document.querySelector('.load-more-btn');
 
-hideLoader();
-
 let searchTerm = '';
 let pageCounter = 1;
 const perPage = 15;
 
 searchForm.addEventListener('submit', submitHandle);
-
 async function submitHandle(event) {
   event.preventDefault();
   searchTerm = inputElement.value.trim();
-    pageCounter = 1;
+  pageCounter = 1;
 
-    galleryElement.innerHTML = '';
-    
+  galleryElement.innerHTML = '';
 
   if (searchTerm === '') {
     iziToast.error({
       title: 'Error',
       message: 'Please enter a search term.',
-      position: 'topCenter', 
+      position: 'topCenter',
     });
+    hideLoadMoreBtn();
 
     return;
   }
-    
-    hideEndOfCollectionMessage();
+
+  hideEndOfCollectionMessage();
 
   showLoader();
   try {
-      const images = await fetchImages(searchTerm);
-      const totalHits = images.totalHits;
+    const images = await fetchImages(searchTerm, pageCounter, perPage);
+    const totalHits = images.totalHits;
 
-    if (images.length === 0) {
+    if (images.hits.length === 0) {
       galleryElement.innerHTML = '';
       iziToast.info({
         title: 'Info',
@@ -49,8 +46,7 @@ async function submitHandle(event) {
           'Sorry, there are no images matching your search query. Please try again!',
         position: 'topCenter',
       });
-
-        hideLoadMoreBtn();
+      hideLoadMoreBtn();
       return;
     } else {
       renderGallery(images.hits);
@@ -72,6 +68,7 @@ async function submitHandle(event) {
     hideLoader();
   }
 }
+
 loadMoreBtn.addEventListener('click', async () => {
   try {
     if (loadMoreBtn) {
@@ -101,7 +98,7 @@ loadMoreBtn.addEventListener('click', async () => {
   }
 });
 
-
+// *loader
 function showLoader() {
   loader.classList.remove('hidden');
 }
@@ -110,7 +107,7 @@ function hideLoader() {
   loader.classList.add('hidden');
 }
 
-
+// * button load more images
 function showLoadMoreBtn() {
   loadMoreBtn.style.display = 'block';
 }
@@ -126,7 +123,7 @@ function hideEndOfCollectionMessage() {
   }
 }
 
-
+// * scroll
 window.addEventListener('scroll', () => {
   if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
     scrollToTopBtn.style.display = 'flex';
