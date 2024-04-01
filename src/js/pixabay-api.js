@@ -13,7 +13,7 @@ export async function fetchImages(searchQuery) {
         orientation: 'horizontal',
         safesearch: true,
         page: "page",
-        per_page: "perPage",
+        per_page: "15",
       },
     });
 
